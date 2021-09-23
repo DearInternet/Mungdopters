@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.sql.DataSource;
 import vo.BoardBean;
+import vo.EntranceBean;
 
 public class BoardDAO {
 
@@ -273,4 +274,59 @@ public class BoardDAO {
 
 	}
 	
+	
+	public int selectEntranceListCount() {
+		// 전체 게시글 갯수
+		int listCount= 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try{
+			pstmt=con.prepareStatement("select count(*) from entrance_ready");
+			rs = pstmt.executeQuery();
+
+			if(rs.next()){
+				listCount=rs.getInt(1);
+			}
+		}catch(Exception ex){		
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+		return listCount;
+	}
+	
+	public ArrayList<EntranceBean> selectEntranceArticleList(int page){
+		// 게시글 페이지에 10개(이하일시 그 개수만큼) 가져옴
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String board_list_sql="select * from entrance_ready order by m_id limit ?,10";
+		ArrayList<EntranceBean> articleList = new ArrayList<EntranceBean>();
+		EntranceBean entrance = null;
+		int startrow=(page-1)*10; 	
+
+		try{
+			pstmt = con.prepareStatement(board_list_sql);
+			pstmt.setInt(1, startrow);
+			rs = pstmt.executeQuery();
+
+			while(rs.next()){
+				entrance = new EntranceBean();
+				entrance.setM_id(rs.getString("m_id"));
+				entrance.setR_type(rs.getString("r_type"));
+				entrance.setR_name(rs.getString("r_name"));
+				entrance.setR_sex(rs.getString("r_sex"));
+				entrance.setR_age(rs.getInt("r_age"));
+				entrance.setR_neutralize(rs.getString("r_neutralize"));
+				entrance.setR_photo(rs.getString("r_photo"));
+				articleList.add(entrance);
+			}
+
+		}catch(Exception ex){
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+		return articleList;
+	}
 }

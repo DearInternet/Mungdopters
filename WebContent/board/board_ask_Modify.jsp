@@ -145,13 +145,21 @@
     <script type="text/javascript">
 
         window.onload = function(){
-
+			var contentid = "<%= article.getM_id() %>";
+			var userid = "<%= userid %>";
             document.getElementById("modify_cancel").onclick = function(){
                 history.back();
             }
 
             document.getElementById("modify_confirm").onclick = function(){
-                modify.submit();
+            	
+            	if (<%= islogin %> == true && userid == contentid) {
+                    modify.submit();
+                }
+                else{
+                    alert("로그인 정보가 일치하지 않습니다.");
+                }
+                
             }
         }
 

@@ -1,18 +1,17 @@
-package vo;
+package entrance;
 
-import java.sql.Date;
-
-public class EntranceBean {
+public class Entrance_Request_Ready_DTO
+{
+	String m_id;
+    String r_type;
+    String r_name;
+    String r_sex;
+    int r_age;
+    String r_neutralize;
+    String r_photo;
+    String r_addition;
 	
-	private String m_id;
-	private String r_type;
-	private String r_name;
-	private String r_sex;
-	private int r_age;
-	private String r_neutralize;
-	private String r_photo;
-	
-	public String getM_id() {
+    public String getM_id() {
 		return m_id;
 	}
 	public void setM_id(String m_id) {
@@ -54,7 +53,12 @@ public class EntranceBean {
 	public void setR_photo(String r_photo) {
 		this.r_photo = r_photo;
 	}
-	
-	
+	public String getR_addition() {
+		return r_addition;
+	}
+	public void setR_addition(String r_addition) {
+		this.r_addition = r_addition;
+	}
+
 	
 }

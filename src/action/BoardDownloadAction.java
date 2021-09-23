@@ -53,7 +53,7 @@ response.setContentType(sMimeType);
 		fileName = URLEncoder.encode(fileName, "UTF-8").replaceAll("\\+", "%20");
 	} else {
 		fileName = new String(fileName.getBytes("UTF-8"), "iso-8859-1");
-	}
+	} 
 
 	response.setHeader("Content-Disposition", "attachment; filename= " + fileName);
 

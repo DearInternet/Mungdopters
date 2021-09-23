@@ -24,8 +24,11 @@
 	 <!-- JQuery -->
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
+	
+	
 	<script>
+	
+	
 
 		$(document).ready(function(){
 			AOS.init();
@@ -98,6 +101,10 @@
 	}
 
 
+
+		.hiddenlists {
+		}
+
 		div.header_default{
 			width: 100%;
 			height: 150px;
@@ -142,6 +149,8 @@
 			margin-right: 5px;
 		}
 
+		
+		
 		div.nav_main_div{
 			width: 1000px;
 			height: 50px;
@@ -270,7 +279,7 @@
 						<a href="#">애견용품</a>
 						<div class="temp7start"></div>	
 						<ul style='margin-right: 0px; line-height: 3em;'>
-							<li><a href="#">구매하기</a></li>
+							<li><a href="./Mall.jsp">구매하기</a></li>
 							<li><a href="#">판매하기</a></li>	
 							<li><a href="#">장바구니</a></li>												
 						</ul>
@@ -301,12 +310,11 @@
 					</li>
 
 					<li class='nav_main_goes4'>
-						<a href="#">유기동물 정보</a>
+						<a href="#">자원봉사</a>
 						<div class="temp4start"></div>	
 						<ul style=' line-height: 3em;'>
-							<li><a href="#">동물보호법</a></li>
-							<li><a href="#">사료 추천</a></li>	
-							<li><a href="#">질병 증상확인</a></li>
+							<li><a href="#">신청하기</a></li>
+							<li><a href="#">신청 진행상황</a></li>	
 						</ul>
 					</li>
 
@@ -315,9 +323,10 @@
 						<div class="temp3start"></div>	
 						<ul style=' line-height: 3em;'>
 							<li><a href="#">나맞견찾기</a></li>
-							<li><a href="#">입양 대기</a></li>	
+							<li><a href="./Adopt_Wait.jsp">입양 대기</a></li>	
 							<li><a href="#">입양 진행상황</a></li>
 							<li><a href="#">입양 후기</a></li>
+							<li class="hiddenlists"><a href="#">입양 관리</a></li>
 						</ul>
 					</li>
 
@@ -326,8 +335,9 @@
 						<div class="temp2start"></div>	
 						<ul style=' line-height: 3em;'>
 							<li><a href="./Entrance_Info.jsp">입소 안내</a></li>
-							<li><a href="#">입소 신청</a></li>	
+							<li><a href="./Entrance_Request.jsp">입소 신청</a></li>	
 							<li><a href="./Entrance_Status.jsp">입소 진행상황</a></li>
+							<li class="hiddenlists"><a href="Entrance_Admin.mdts">입소 관리</a></li>
 						</ul>
 					</li>
 
@@ -350,8 +360,20 @@
 	</body>
 <script>
 
-	var userid = "<%= userid %>" ;
-	var islogin = "<%= islogin %>" ;
+var userid = "<%= userid %>" ;
+var islogin = "<%= islogin %>" ;
+
+	$(document).ready(function(){
+		
+		$('.hiddenlists').hide();
+		
+		
+		if(islogin === 'true' && userid === 'admin'){
+		$('.hiddenlists').show();
+		} else {}
+		
+	})
+
 
 	function popup(){
 		var url = "./Login.jsp";

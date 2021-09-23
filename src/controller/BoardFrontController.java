@@ -17,7 +17,8 @@ import action.BoardToModifyAction;
 import action.BoardToReplyAction;
 import action.BoardToWriteAction;
 import action.BoardWriteAction;
-import action.EntranceStatusAction;
+import action.EntranceAdminAction;
+import action.SendToAdoptWaitAction;
 import vo.ActionForward;
 
 @WebServlet("*.mdts") // 서블릿 Annotation
@@ -122,6 +123,24 @@ public class BoardFrontController extends javax.servlet.http.HttpServlet {
 			}
 		}
 
+		else if (command.equals("/Entrance_Admin.mdts")) {
+			action = new EntranceAdminAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		else if (command.equals("/Send_To_Adopt_Wait.mdts")) {
+			action = new SendToAdoptWaitAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 		if (forward != null) {
 
 			if (forward.isRedirect()) {
